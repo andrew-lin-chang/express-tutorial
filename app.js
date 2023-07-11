@@ -9,6 +9,20 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+// set up mongoose connection
+const mongoose = require('mongoose');
+// set strictQuery to false to opt into filtering by properties 
+mongoose.set("strictQuery", false);
+const mongoDB = 'mongodb+srv://andrewchang:57UaE70mqNJJCwhS@cluster0.8zzggys.mongodb.net/?retryWrites=true&w=majority';
+
+// wait for database to connect, log error if problem
+main()
+  .then((res) => console.log('Connected to MongoDB'))
+  .catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB)
+}
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
