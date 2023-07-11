@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+require('dotenv').config()
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -13,7 +15,7 @@ var app = express();
 const mongoose = require('mongoose');
 // set strictQuery to false to opt into filtering by properties 
 mongoose.set("strictQuery", false);
-const mongoDB = 'mongodb+srv://andrewchang:57UaE70mqNJJCwhS@cluster0.8zzggys.mongodb.net/?retryWrites=true&w=majority';
+const mongoDB = process.env.MONGO_CONNECTION;
 
 // wait for database to connect, log error if problem
 main()
